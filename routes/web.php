@@ -25,11 +25,13 @@ Route::middleware('auth')
            ->group(function(){
                 Route::get('/', 'HomeController@index')->name ('home');
                 Route::resource('posts','PostController');
+                Route::resource('categories','CategoryController');
+
 
            });
 
 
-
-Route::get("{any?}",function(){
-    return view ("guest.home");
-})->where ("any", ".*");         
+          //rotta che intercetta tutte le altre rotte che abbiano un un prefisso diverso da admin
+            Route::get("{any?}",function(){
+                return view ("guest.home");
+            })->where ("any", ".*");         
